@@ -1,0 +1,23 @@
+<!-- Breadcrumb -->
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+<!-- Page Title -->
+<mat-card-title>{{literals.paramsTarifasTitle}}</mat-card-title>
+
+<mat-card-content>
+  <app-parameter-de-tarifa-search [compName]="'home'" (searchData)="search($event)" (cancel)="cancel()"></app-parameter-de-tarifa-search>
+  <div class="col-lg-12">
+      <button mat-icon-button color="primary" [routerLink]="['parametroAltaNuevo']"><mat-icon>add_circle_outline</mat-icon>
+      {{literals.paramTarifas.add}}
+      </button>
+  </div>
+  <mat-card class="paramTarifaTable">
+    <app-table *ngIf="this.whileLoading; else loading" [literals]="literals" [data]="dataSource" [columns]="columns" (checkCenter)="checkCenter($event)" [scrollable]=true (editData)="edit($event)" (deleteData)="delete($event)"></app-table>
+  </mat-card>
+  <ng-template #loading>
+    <!-- <mat-spinner class="loading"></mat-spinner> -->
+    <div class="whileLoading">
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+      <div>{{literals.pleaseWait}}</div>
+    </div>
+  </ng-template>
+</mat-card-content>

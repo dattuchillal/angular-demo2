@@ -1,0 +1,133 @@
+<div class="parkingRateParametroManagement" #parkingRateType>
+  <div class="advance-search-filter">
+    <span (click)="advanceSearch()">
+      {{literals.filtrosAvanzados}}
+      <mat-icon *ngIf="!isAdvanceSearch">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="isAdvanceSearch">keyboard_arrow_up</mat-icon>
+    </span>
+  </div>
+  <form [formGroup]="parkingRateParametroManagement" #parkingRateParametroDirective="ngForm" (ngSubmit)="parkingRateParametroManagementSubmit()" novalidate>
+    <div class="row" *ngIf="!isAdvanceSearch">
+      <div class="col-lg-2">
+          <mat-form-field appearance="outline">
+            <mat-label>{{literals.paramTarifas.tipoTarifaLabel}}</mat-label>
+            <input matInput placeholder="{{'EJ: G'}}" autocomplete="off" formControlName="tipodeTarifa" id="tipodeTarifa">
+          </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+          <mat-form-field appearance="outline">
+            <mat-label>{{literals.paramTarifas.descripcionLabel}}</mat-label>
+            <input matInput placeholder="{{'EJ: Gratuita'}}" autocomplete="off" formControlName="description" id="description">
+          </mat-form-field>
+      </div>
+      <div class="col-lg-5">
+          <mat-form-field appearance="outline">
+              <mat-label>{{literals.paramTarifas.vigenciaDesdeLabel}}</mat-label>
+              <input matInput
+                  [satDatepicker]="picker"
+                  autocomplete="off"
+                  (focus)="picker.open()"
+                  formControlName="vigenciaDesde">
+              <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+              <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+            </mat-form-field>
+      </div>
+      <div class="col-lg-3">
+        <div class="tipos-tarif-search-action">
+            <button mat-stroked-button color="basic" class="mat-stroked-button" type="button" (click)="discard()"><span>{{literals.clear}}</span></button>
+            <button mat-raised-button color="primary" type="submit">{{literals.search}}</button>
+        </div>
+      </div>
+    </div>
+    <!-- Advanced Search Template -->
+    <div class="advanced-search-section" *ngIf="isAdvanceSearch">
+        <div class="row" [@filterState]>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-label>{{literals.paramTarifas.tipoTarifaLabel}}</mat-label>
+                <input matInput placeholder="{{'EJ: G'}}" autocomplete="off" formControlName="tipodeTarifa" id="tipodeTarifa">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-label>{{literals.paramTarifas.descripcionLabel}}</mat-label>
+                <input matInput placeholder="{{'EJ: Gratitude'}}" autocomplete="off" formControlName="description" id="description">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+              <mat-form-field appearance="outline">
+                  <mat-label>{{literals.paramTarifas.vigenciaDesdeLabel}}</mat-label>
+                  <input matInput
+                      [satDatepicker]="picker"
+                      autocomplete="off"
+                      (focus)="picker.open()"
+                      formControlName="vigenciaDesde">
+                  <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+                  <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+                </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                <mat-label>{{literals.paramTarifas.importeMaxLabel}}</mat-label>
+                <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1.00'}}" autocomplete="off" formControlName="importeParkingMax" id="importeParkingMax">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                <mat-label>{{literals.paramTarifas.importeMinLabel}}</mat-label>
+                <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1.00'}}" autocomplete="off" formControlName="importeMinSinCompra" id="importeMinSinCompra">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-label>{{literals.paramTarifas.tiempoMaxSCLabel}}</mat-label>
+                <input matInput appAllowNumericOnly placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="tiempoMaxSinCompra" id="tiempoMaxSinCompra">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                <mat-label>{{literals.paramTarifas.importeMin1Label}}</mat-label>
+                <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1.00'}}" autocomplete="off" formControlName="importeMin1Hora" id="importeMin1Hora">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                <mat-label>{{literals.paramTarifas.importeMin2Label}}</mat-label>
+                <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1.00'}}" autocomplete="off" formControlName="importeMin2Hora" id="importeMin2Hora">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-label>{{literals.paramTarifas.fraccionFactLabel}}</mat-label>
+                <input matInput appAllowNumericOnly placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="fraccionFacturacion" id="fraccionFacturacion">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                <mat-label>{{literals.paramTarifas.costeFracLabel}}</mat-label>
+                <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1.00'}}" autocomplete="off" formControlName="costeFraccion" id="costeFraccion">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+              <mat-form-field appearance="outline">
+                <mat-label>{{literals.paramTarifas.tiempoMaxLabel}}</mat-label>
+                <input matInput appAllowNumericOnly placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="tiempoMaxSalida" id="tiempoMaxSalida">
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="advanced-search-filter-actions">
+                <button mat-stroked-button color="basic" class="mat-stroked-button" type="button" (click)="discard()"><span>{{literals.clear}}</span></button>
+                <button mat-raised-button color="primary" type="submit">{{literals.search}}</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </form>
+</div>

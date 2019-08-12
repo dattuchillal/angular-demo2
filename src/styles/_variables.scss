@@ -1,0 +1,23 @@
+@mixin flexEndRow() {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@mixin flexSpaceBetween() {
+    display: flex;
+    justify-content: space-between;
+}
+
+$colorRed: #ff0000;
+$bodyFontFamily: Roboto, "Helvetica Neue", sans-serif;
+$fontBold: bold;
+$marginAuto: 0 auto;
+$gap16: 16px;
+$gap12: 12px;
+$gap20: 20px;
+$gap8: 8px;
+$gap32: 32px;
+$fontsize10: 10px;
+$fontsize12: 12px;
+$fontsize14: 14px;
+$fontsize12: 20px;

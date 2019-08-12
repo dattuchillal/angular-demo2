@@ -1,0 +1,85 @@
+<td-layout>
+
+  <td-layout-nav-list #navList [opened]="(media.registerQuery('gt-sm') | async) && isLogged()"
+    [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'over'"
+    [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '250px' : '100%'" fullscreen>
+    <!-- Header Title -->
+    <div td-sidenav-toolbar-content layout="row" layout-align="start center">
+      <button *ngIf="isLogged()" mat-icon-button tdLayoutNavListToggle>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span [routerLink]="['/']" class="cursor-pointer"> {{ 'APP_NAME' | translate }}</span>
+    </div>
+    <div td-toolbar-content layout="row" layout-align="start center" flex>
+      <!-- Header Title -->
+      <button class="logoHead" mat-icon-button tdLayoutNavListOpen [hideWhenOpened]="true">
+        <mat-icon *ngIf="isLogged()" >menu</mat-icon>
+        <span [routerLink]="['/']" class="cursor-pointer"> {{ 'APP_NAME' | translate }} </span>
+      </button>
+      <span></span>
+      <span flex></span>
+
+      <!-- Language -->
+      <button mat-icon-button matTooltip="{{literals.LANGUAGE_TOOLTIP}}" [mat-menu-trigger-for]="lang">
+        {{currentLang}}<mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu xPosition="before" #lang="matMenu">
+        <button mat-menu-item *ngFor="let language of supportedLanguages" (click)="setLanguage(language)">
+          <span>{{language}}</span>
+        </button>
+      </mat-menu>
+
+      <!-- Login -->
+      <button *ngIf="isLogged()" mat-icon-button matTooltip="{{literals.Login}}" [mat-menu-trigger-for]="more">
+        <mat-icon>account_circle</mat-icon>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu xPosition="before" #more="matMenu">
+        <button mat-menu-item>
+          <span>{{'Logged in as' | translate}} <strong>devon</strong> </span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>power_settings_new</mat-icon>
+          <span>{{'Logout' | translate}}</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <!-- Side Menu -->
+    <mat-nav-list *ngIf="isLogged()" td-sidenav-content [tdLayoutNavListClose]="!media.query('gt-sm')">
+
+      <div *ngFor="let menuLink of menuLinks">
+
+        <div *ngIf="menuLink.items; else elseBlock">
+          <td-expansion-panel [expand]="false">
+            <ng-template td-expansion-panel-label>
+
+              <span>{{menuLink.label}}</span>
+            </ng-template>
+            <div>
+              <mat-list-item *ngFor="let item of menuLink.items" [routerLink]="[item.routerLink]"
+                routerLinkActive="router-link-active">
+                <a matLine>{{item.label}}</a>
+              </mat-list-item>
+            </div>
+          </td-expansion-panel>
+        </div>
+
+        <ng-template #elseBlock>
+          <mat-list-item [routerLink]="[menuLink.routerLink]" routerLinkActive="router-link-active">
+            <a matLine>{{menuLink.label}}</a>
+          </mat-list-item>
+        </ng-template>
+
+      </div>
+    </mat-nav-list>
+    <div tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+      <mat-card>
+
+        <router-outlet></router-outlet>
+
+      </mat-card>
+    </div>
+
+  </td-layout-nav-list>
+</td-layout>

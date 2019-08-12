@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+.mat-simple-snackbar-action .mat-button {
+  color: white !important
+}
+
+td-breadcrumb .td-breadcrumb-separator-icon.mat-icon-no-color {
+  display: none !important
+}
+
+td-breadcrumbs {
+  margin-left: 15px
+}
+
+mat-form-field {
+  font-size: 12px !important;
+  width: 100%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: red !important;
+}
+
+.mat-drawer-container {
+  background: #fff !important;
+}
+
+.mat-error {
+  color: #ff0000 !important;
+  font-size: 12px;
+}
+
+.porDefecto.mat-button[disabled][disabled] {
+  background: #eeeeee;
+  color: #000000
+}
+
+.td-data-table-row:nth-child(even) {
+  background-color: white;
+}
+
+.td-data-table-row:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+.td-data-table-heading {
+  padding: 0 10px !important;
+}
+.paramTarifaTable .td-data-table-column {
+  overflow-x: hidden;
+}
+.paramTarifaTable table {
+  table-layout: fixed;
+}
+.td-data-table-column, .td-data-table-cell {
+  border-right: #f1f1f1 solid 1px
+}
+mat-toolbar [mat-icon-button] {
+  margin: 0 12px !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label,
+.mat-form-field.mat-form-field-invalid .prefix {
+  color: #ff0000 !important;
+}
+
+.mat-hint .asterisk {
+  color: #ff0000;
+}
+mat-card-content mat-card {
+  padding: 0;
+  margin: 0 0 8px 0 !important;
+}
+
+.td-data-table-cell-content-wrapper {
+  justify-content: center !important;
+}
+
+table[td-data-table] .td-data-table-column {
+  text-align: center !important;
+}
+
+:first-child > .td-data-table-cell-content-wrapper {
+  justify-content: center !important;
+  padding-left: 0 !important;
+}

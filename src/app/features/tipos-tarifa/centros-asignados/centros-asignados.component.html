@@ -1,0 +1,68 @@
+<!-- Breadcrumb -->
+
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+<!-- Page Title -->
+<mat-card-title>{{literals.centrosAsignadosTipoTarifa}}</mat-card-title>
+
+<mat-card-content>
+  <app-tipos-tarifa-search [compName]="'centros'"></app-tipos-tarifa-search>
+  <td-tab-select [(ngModel)]="selectedTab">
+    <td-tab-option [value]="">
+      <!-- {{literals.centrosAsignados}} -->
+      {{literals.tiposTarifa.centrosAsignadosTab}}
+    </td-tab-option>
+  </td-tab-select>
+  <!-- <app-tipos-tarifa-search [compName]="'home'" (searchData)="search($event)" (cancel)="cancel()"></app-tipos-tarifa-search> -->
+  <form class="filterForm" [formGroup]="parkingRateManagement" (ngSubmit)="parkingRateManagementSubmit()" novalidate>
+    <div class="row">
+      <div class="col-lg-3">
+          <mat-form-field appearance="outline">
+            <mat-label>{{literals.tiposTarifa.centro}}</mat-label>
+            <input matInput placeholder="{{'EJ: G'}}" autocomplete="off" formControlName="tipodeTarifa">
+          </mat-form-field>
+          <!-- <div *ngIf="tipoDeTarifaControl.invalid && (tipoDeTarifaControl.dirty || tipoDeTarifaControl.touched)" class="error-msg">
+              <div *ngIf="tipoDeTarifaControl.errors.required">
+                {{literals.requiredField}}
+              </div>
+            </div> -->
+      </div>
+      <div class="col-lg-5">
+          <mat-form-field appearance="outline">
+            <mat-label>{{literals.paramTarifas.descripcionLabel}}</mat-label>
+            <input matInput placeholder="{{'EJ: ' + literals.Gratuita}}" autocomplete="off" formControlName="description">
+          </mat-form-field>
+          <!-- <div *ngIf="tipoDeDescriptionControl.invalid && (tipoDeDescriptionControl.dirty || tipoDeDescriptionControl.touched)" class="error-msg">
+            <div *ngIf="tipoDeDescriptionControl.errors.required">
+              {{literals.requiredField}}
+            </div>
+          </div> -->
+      </div>
+      <div class="col-lg-4">
+        <div class="tipos-tarif-search-action text-right">
+            <button mat-stroked-button color="basic" class="mat-stroked-button clearBtn" type="button" (click)="discard()"><span>{{literals.clear}}</span></button>
+            <button mat-raised-button color="primary" type="submit">{{literals.search}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="col-lg-12">
+      <!-- <button mat-icon-button color="primary"><mat-icon>add_circle_outline</mat-icon>
+
+      {{literals.tiposTarifa.addCentro}}
+      </button> -->
+  </div>
+  <mat-card *ngIf="dataSource.length && whileLoading">
+    <app-table [literals]="literals" [data]="dataSource" [columns]="columns" (editData)="edit($event)" (deleteData)="delete($event)"></app-table>
+  </mat-card>
+
+  <div class="row">
+    <div class="col-lg-12 actions">
+        <div class="parametro-tarif-search-action">
+          <button mat-raised-button color="basic" [routerLink]="'/tipos-tarifa'" type="button"><span>{{literals.return}}</span></button>
+        </div>
+      </div>
+  </div>
+
+</mat-card-content>
+

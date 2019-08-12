@@ -1,0 +1,9 @@
+<td-breadcrumbs>
+  <ng-container *ngFor="let breadcrumb of breadcrumb; last as isLast">
+    <a *ngIf="!isLast; else lastCrumb" td-breadcrumb [routerLink]="breadcrumb.link">
+      {{ breadcrumb.name }}</a>
+    <ng-template #lastCrumb>
+      <td-breadcrumb>{{ breadcrumb.name }}</td-breadcrumb>
+    </ng-template>
+  </ng-container>
+</td-breadcrumbs>

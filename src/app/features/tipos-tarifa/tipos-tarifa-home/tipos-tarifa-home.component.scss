@@ -1,0 +1,15 @@
+@import '../../../../styles/_variables.scss';
+
+mat-card {
+    padding-bottom: $gap12;
+    .whileLoading {
+        .mat-progress-bar {
+            width: 25% !important;
+            margin: $marginAuto;
+            padding: $gap20;
+        }
+        > div {
+            text-align: center;
+        }
+    }
+}

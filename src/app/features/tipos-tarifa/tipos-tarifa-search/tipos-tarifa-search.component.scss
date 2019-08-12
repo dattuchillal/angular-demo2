@@ -1,0 +1,25 @@
+@import '../../../../styles/_variables.scss';
+
+.parkingRateManagement {
+    padding-left: 0;
+    .tipos-tarif-search-action {
+        @include flexEndRow();
+        margin-top: $gap8;
+        button {
+            font-weight: bold;
+        }
+        button:first-child {
+            margin-right: $gap16;
+        }
+    }
+    .alta.tipos-tarif-search-action {
+        @include flexSpaceBetween();
+        margin-top: $gap8;
+    }
+    .alta-actions {
+        position: absolute;
+        background: #bbb;
+        bottom: 0;
+        padding: $gap20;
+    }
+}

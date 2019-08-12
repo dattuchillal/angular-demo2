@@ -1,0 +1,14 @@
+mat-card {
+    padding-bottom: 10px;
+    .whileLoading {
+        .mat-progress-bar {
+            width: 25% !important;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        > div {
+            text-align: center;
+        }
+    }
+}
+

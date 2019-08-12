@@ -1,0 +1,42 @@
+<div class="parkingRateManagement"  #parkingRateType [style.height.px]="pageHeight">
+  <form [formGroup]="parkingRateManagement" (ngSubmit)="parkingRateManagementSubmit()" novalidate>
+    <div class="row">
+      <div class="col-lg-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{literals.paramTarifas.tipoTarifaLabel}}</mat-label>
+          <input matInput maxlength="1" placeholder="{{'EJ: G'}}" autocomplete="off" formControlName="tipodeTarifa">
+          <mat-hint align="start" *ngIf="parkingRateManagement.get('tipodeTarifa').invalid">
+            {{literals.requiredField}} <span class="asterisk">*</span>
+          </mat-hint>
+          <mat-error *ngIf="hasError('tipodeTarifa', 'required')">{{literals.requiredField}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-5">
+        <mat-form-field appearance="outline">
+          <mat-label>{{literals.paramTarifas.descripcionLabel}}</mat-label>
+          <input matInput placeholder="{{'EJ: Gratuita'}}" autocomplete="off" formControlName="description">
+          <mat-hint align="start" *ngIf="parkingRateManagement.get('description').invalid">
+            {{literals.requiredField}} <span class="asterisk">*</span>
+          </mat-hint>
+          <mat-error *ngIf="hasError('description', 'required')">{{literals.requiredField}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4" *ngIf="!(compName == 'alta' || compName =='centros')">
+        <div class="tipos-tarif-search-action">
+            <button mat-stroked-button color="basic" class="mat-stroked-button" type="button" (click)="discard()"><span>{{literals.clear}}</span></button>
+            <button mat-raised-button color="primary" type="submit">{{literals.search}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="compName == 'alta'">
+        <div class="col-lg-12 alta-actions">
+          <div class="alta tipos-tarif-search-action">
+              <button mat-stroked-button color="basic" class="mat-stroked-button"
+                type="button" [routerLink]="'/tipos-tarifa'"><span>{{literals.return}}</span></button>
+              <button mat-raised-button color="primary"
+                type="submit">{{literals.confirm}}</button>
+          </div>
+        </div>
+    </div>
+  </form>
+</div>

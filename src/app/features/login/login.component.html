@@ -1,0 +1,19 @@
+
+  <div layout="row" layout-align="center" class="pad-top-xl">
+    <mat-card style="width:350px;">
+      <mat-card-title style="text-align: center">{{literals.Login}}</mat-card-title>
+      <mat-card-content>
+        <form layout="column" class="pad" (ngSubmit)="login(loginForm.form)" #loginForm="ngForm">
+          <mat-form-field flex>
+            <input matInput type="text" [placeholder]="literals.Username" ngModel name="username" required>
+          </mat-form-field>
+
+          <mat-form-field flex>
+            <input matInput type="password" [placeholder]="literals.Password" ngModel name="password" required>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">{{literals.Login}}</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

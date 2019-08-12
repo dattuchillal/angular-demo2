@@ -1,0 +1,50 @@
+// .scrollable-table {
+    // display: block !important;
+    // overflow-x: auto !important;
+    // white-space: nowrap !important;
+// }
+
+.dataTableModification {
+    position: absolute;
+
+    .dataTableOptions {
+        position: relative;
+        ul {
+            list-style: none;
+            line-height: 35px;
+            padding: 0;
+            margin: 0;
+            width:170px;
+            span { margin-right: 12px;}
+            li { cursor: pointer; font-size: 13px;}
+            mat-icon {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+span.arrow {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    left: 185px;
+    top: 1px;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #fff;
+    border-bottom: 15px solid transparent;
+}
+
+.tdDataTableIcon {
+    cursor: pointer;
+}
+
+td-paging-bar {
+    display: flex;
+    justify-content: center;
+}
+// .td-data-table-column {
+//   max-width: 50%;
+//   overflow-x: hidden
+// }

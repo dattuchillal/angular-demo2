@@ -1,0 +1,57 @@
+@import '../../../../styles/_variables.scss';
+
+.parkingRateParametroManagement {
+    padding-left: 0;
+    .tipos-tarif-search-action {
+        font-family: $bodyFontFamily;
+        @include flexEndRow();
+        margin-top: $gap8;
+        button {
+            font-weight: $fontBold;
+        }
+        button:first-child {
+            margin-right: $gap16;
+        }
+    }
+
+    .error-msg {
+        color: $colorRed;
+        font-size: $gap12;
+        margin-top: -$gap12;
+    }
+
+    .advance-search-filter {
+        @include flexEndRow();
+        span {
+            cursor: pointer;
+            @include flexEndRow();
+            font-family: $bodyFontFamily;
+            color: $colorRed;
+            margin-bottom: $gap8;        
+            mat-icon {
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
+
+    .advanced-search-filter-actions {
+        @include flexEndRow();
+        button {
+            font-family: $bodyFontFamily;
+            font-weight: $fontBold;
+        }
+        button:first-child {
+            margin-right: $gap16;
+        }
+    }
+
+    .prefix {
+        font-size: $fontsize14;
+        vertical-align: top;
+        position: relative;
+        top: -2px;
+        left: -4px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}

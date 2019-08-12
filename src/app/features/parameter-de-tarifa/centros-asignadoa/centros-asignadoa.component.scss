@@ -1,0 +1,44 @@
+.mat-card mat-card-content {
+  height: 50vh !important;
+}
+.parkingRateParametroManagement {
+  padding-left: 0;
+  .tipos-tarif-search-action {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+      button {
+          font-weight: bold;
+      }
+      button:first-child {
+          margin-right: 16px;
+      }
+  }
+
+  .error-msg {
+      color: red;
+      font-size: 12px;
+      margin-top: -12px;
+  }
+}
+
+mat-card {
+  padding-bottom: 10px;
+  .whileLoading {
+      .mat-progress-bar {
+          width: 25% !important;
+          margin: 0 auto;
+          padding: 20px;
+      }
+      > div {
+          text-align: center;
+      }
+  }
+}
+
+.parametro-tarif-search-action {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-left: 16px;
+}

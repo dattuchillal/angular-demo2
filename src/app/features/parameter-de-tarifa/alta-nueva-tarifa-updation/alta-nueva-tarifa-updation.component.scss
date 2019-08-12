@@ -1,0 +1,30 @@
+@import '../../../../styles/_variables.scss';
+
+.parametroAltaNuevaTarifaManagement {
+    .actions {
+        position: absolute;
+        bottom: 0;
+        background: #bbb;
+        padding: $gap20;
+        margin-left: $gap16;
+
+        .parametro-tarif-search-action {
+            @include flexSpaceBetween();
+            margin-bottom: $gap8;
+            padding-left: $gap16;
+        }
+    }
+
+    .form-fields {
+        display: flex;
+    }
+
+    .prefix {
+        font-size: $fontsize14;
+        vertical-align: top;
+        position: relative;
+        top: -2px;
+        left: -4px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}

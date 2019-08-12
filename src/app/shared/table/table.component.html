@@ -1,0 +1,73 @@
+<table td-data-table (scroll)="onScroll($event)" [class.scrollable-table]="scrollable">
+  <thead>
+    <tr td-data-table-column-row>
+      <th td-data-table-column
+          *ngFor="let column of columns"
+          [numeric]="column.numeric"
+          [title]="column.label">
+        {{column.label}}
+      </th>
+      <th td-data-table-column *ngIf="showView"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr td-data-table-row *ngFor="let row of filteredData">
+      <td td-data-table-cell *ngFor="let column of columns" [numeric]="column.numeric">
+        <!-- Date Columns -->
+        <div *ngIf="column.name === 'fechaDesdeVigencia' || column.name === 'fechaFin' else currencyColumn">
+            <span>{{column.format ? column.format(row[column.name]) : row[column.name] | stringToDateFormat}}</span>
+        </div>
+        <!-- Currency Columns -->
+        <ng-template #currencyColumn>
+            <div *ngIf="column.name === 'importeParkingMax'
+                      || column.name === 'importeMinSinCompra'
+                      || column.name === 'importeMin1Hora'
+                      || column.name === 'importeMin2Hora'
+                      || column.name === 'costeFraccion' else porDefecto">
+                <span>{{column.format ? column.format(row[column.name]) : row[column.name] | currency:'EUR' }}</span>
+            </div>
+        </ng-template>
+        <!-- PorDefecto Columns -->
+        <ng-template #porDefecto>
+          <div *ngIf="column.name === 'porDefecto' else default">
+              <button class="porDefecto" mat-button disabled="disabled">{{row[column.name] ? literals.tiposTarifa.porDefectoLabel : ""}}</button>
+          </div>
+        </ng-template>
+        <!-- Default Columns -->
+        <ng-template #default>
+          <div>
+            <span>{{column.format ? column.format(row[column.name]) : row[column.name] }}</span>
+          </div>
+        </ng-template>
+
+      </td>
+      <td td-data-table-cell (click)="dataTableModification($event, row)" align="start" *ngIf="showView">
+        <mat-icon class="tdDataTableIcon">more_vert</mat-icon>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<td-paging-bar #pagingBar [pageSize]="pageSize" [total]="filteredTotal" (change)="page($event)">
+  <span hide-xs>Filas por página:</span>
+  <mat-select [style.width.px]="50" [(ngModel)]="pageSize">
+    <mat-option *ngFor="let size of [50,100,200,500]" [value]="size">
+      {{size}}
+    </mat-option>
+  </mat-select>
+  {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+</td-paging-bar>
+
+<!-- Tipos De Tarifa options - TODO: Needs to make separate Component : DATTU-->
+<div class="dataTableModification shadow p-3 mb-5 bg-white rounded" #viewElement *ngIf="view" [ngStyle]="{'top': tdOffsetTop + 'px', 'left': tdOffsetLeft + 'px' }">
+  <div class="dataTableOptions">
+      <ul>
+          <li *ngIf="literalKey === 'tiposTarifa' || literalKey === 'paramTarifas'" (click)="edit()"><span><mat-icon>edit</mat-icon></span><span>{{literals[literalKey].edit}}</span></li>
+          <li *ngIf="literalKey === 'tiposTarifa' || literalKey === 'paramTarifas'" (click)="navigateToCentros()"><span><mat-icon>visibility</mat-icon></span><span>{{literals[literalKey].showCentrosAsignados}}</span></li>
+          <li *ngIf="literalKey === 'tiposTarifa'" (click)="setPorDefecto()"><span><mat-icon>check_box</mat-icon></span><span>{{literals[literalKey].setPorDefecto}}</span></li>
+          <li *ngIf="literalKey === 'tiposTarifa' || literalKey === 'paramTarifas'" (click)="delete()"><span><mat-icon>delete</mat-icon></span><span>{{literals[literalKey].delete}}</span></li>
+          <li *ngIf="literalKey === 'centros'" (click)="delete()"><span><mat-icon>delete</mat-icon></span><span>{{literals[literalKey].delete}}</span></li>
+        </ul>
+        <span class="arrow"></span>
+  </div>
+</div>
+

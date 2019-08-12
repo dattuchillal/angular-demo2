@@ -1,0 +1,117 @@
+<div class="parametroAltaNuevaTarifaManagement" #parkingRateType [style.height.px]="pageHeight">
+    <form [formGroup]="parametroAltaNuevaTarifa" (ngSubmit)="parametroAltaNuevaTarifaSubmit()" novalidate>
+      <div>
+          <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{literals.paramTarifas.tipoTarifaLabel}}</mat-label>
+                      <mat-select formControlName="tipodeTarifaId" id="tipodeTarifaId">
+                        <mat-option *ngFor="let tipodeTarifa of tipodeTarifas" [value]="tipodeTarifa.tipodeTarifa">{{tipodeTarifa.tipodeTarifa}} - {{tipodeTarifa.description}}</mat-option>
+                      </mat-select>
+                      <mat-hint align="start" *ngIf="parametroAltaNuevaTarifa.get('tipodeTarifaId').invalid">
+                        {{liter als.requiredField}} <span class="asterisk">*</span>
+                      </mat-hint>
+                      <mat-error *ngIf="hasError('tipodeTarifaId', 'required')">{{literals.requiredField}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 form-fields">
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{literals.paramTarifas.vigenciaDesdeLabel}}</mat-label>
+                      <input matInput [matDatepicker]="fechaDesdeVigencia"
+                              [min]="minDate"
+                              placeholder="DD / MM / YYYY"
+                              formControlName="fechaDesdeVigencia"
+                              (focus)="fechaDesdeVigencia.open()">
+                      <mat-hint align="start" *ngIf="parametroAltaNuevaTarifa.get('fechaDesdeVigencia').invalid">
+                        {{literals.requiredField}} <span class="asterisk">*</span>
+                      </mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="fechaDesdeVigencia"></mat-datepicker-toggle>
+                      <mat-datepicker #fechaDesdeVigencia></mat-datepicker>
+                      <mat-error *ngIf="hasError('fechaDesdeVigencia', 'required')">{{literals.requiredField}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                      <mat-label>{{literals.paramTarifas.importeMaxLabel}}</mat-label>
+                      <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="importeParkingMax" id="importeParkingMax">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                      <mat-label>{{literals.paramTarifas.importeMinLabel}}</mat-label>
+                      <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="importeMinSinCompra" id="importeMinSinCompra">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{literals.paramTarifas.tiempoMaxSCLabel}}</mat-label>
+                      <input matInput appAllowNumericOnly placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="tiempoMaxSinCompra" id="tiempoMaxSinCompra">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                      <mat-label>{{literals.paramTarifas.importeMin1Label}}</mat-label>
+                      <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="importeMin1Hora" id="importeMin1Hora">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-2">
+                    <mat-form-field appearance="outline">
+                      <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                      <mat-label>{{literals.paramTarifas.importeMin2Label}}</mat-label>
+                      <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="importeMin2Hora" id="importeMin2Hora">
+                    </mat-form-field>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 form-fields">
+                  <div class="col-lg-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{literals.paramTarifas.fraccionFactLabel}}</mat-label>
+                        <input matInput appAllowNumericOnly placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="fraccionFacturacion" id="fraccionFacturacion">
+                        <mat-hint align="start" *ngIf="parametroAltaNuevaTarifa.get('fraccionFacturacion').invalid">
+                          {{literals.requiredField}} <span class="asterisk">*</span>
+                        </mat-hint>
+                        <mat-error *ngIf="hasError('fraccionFacturacion', 'required')">{{literals.requiredField}}</mat-error>
+                        <mat-error *ngIf="hasError('fraccionFacturacion', 'numberShouldGreaterThanZero')">{{literals.numberShouldGreaterThanZero}}</mat-error>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-lg-2">
+                      <mat-form-field appearance="outline">
+                        <mat-icon matPrefix class="prefix">euro_symbol</mat-icon>
+                        <mat-label>{{literals.paramTarifas.costeFracLabel}}</mat-label>
+                        <input matInput appNumericWithTwoDecimal placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="costeFraccion" id="costeFraccion">
+                        <mat-hint align="start" *ngIf="parametroAltaNuevaTarifa.get('costeFraccion').invalid">
+                          {{literals.requiredField}} <span class="asterisk">*</span>
+                        </mat-hint>
+                        <mat-error *ngIf="hasError('costeFraccion', 'required')">{{literals.requiredField}}</mat-error>
+                        <mat-error *ngIf="hasError('costeFraccion', 'numberShouldGreaterThanZero')">{{literals.numberShouldGreaterThanZero}}</mat-error>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-lg-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{literals.paramTarifas.tiempoMaxLabel}}</mat-label>
+                        <input matInput appAllowNumericOnly placeholder="{{'EJ: 1'}}" autocomplete="off" formControlName="tiempoMaxSalida" id="tiempoMaxSalida">
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 actions">
+              <div class="parametro-tarif-search-action">
+                  <button mat-stroked-button color="basic" [routerLink]="'/parametros-tarifa'" class="mat-stroked-button" type="button"><span>{{literals.return}}</span></button>
+                  <button mat-raised-button color="primary" type="submit">{{literals.confirm}}</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </form>
+  </div>

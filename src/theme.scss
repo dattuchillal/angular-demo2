@@ -1,0 +1,118 @@
+@import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i');
+
+$custom-typography: mat-typography-config($font-family: '"Nunito Sans", sans-serif;');
+@include mat-core($custom-typography);
+
+$md-consum-primary: (
+    50 : #fef2e4,
+    100 : #fddfbb,
+    200 : #fcca8e,
+    300 : #fab561,
+    400 : #f9a53f,
+    500 : #f8951d,
+    600 : #f78d1a,
+    700 : #f68215,
+    800 : #f57811,
+    900 : #f3670a,
+    A100 : #ffffff,
+    A200 : #fff1e9,
+    A400 : #ffd0b6,
+    A700 : #ffbf9c,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-consum-accent: (
+    50 : #fbebe6,
+    100 : #f5cec1,
+    200 : #eead98,
+    300 : #e78c6f,
+    400 : #e27350,
+    500 : #dd5a31,
+    600 : #d9522c,
+    700 : #d44825,
+    800 : #cf3f1f,
+    900 : #c72e13,
+    A100 : #fff8f6,
+    A200 : #ffcbc3,
+    A400 : #ff9e90,
+    A700 : #ff8777,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-consum-warn: (
+    50 : #fff9e6,
+    100 : #fef0c1,
+    200 : #fee698,
+    300 : #fedc6e,
+    400 : #fdd54f,
+    500 : #fdcd30,
+    600 : #fdc82b,
+    700 : #fcc124,
+    800 : #fcba1e,
+    900 : #fcae13,
+    A100 : #ffffff,
+    A200 : #fffcf6,
+    A400 : #ffeac3,
+    A700 : #ffe0aa,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$primary: mat-palette($md-consum-primary, 500);
+$accent:  mat-palette($md-consum-accent, 500);
+
+$warn:    mat-palette($md-consum-warn, 500);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$foreground: map-get($theme, foreground);
+$background: map-get($theme, background);
+
+@include angular-material-theme($theme);
+@include covalent-theme($theme);

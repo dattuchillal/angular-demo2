@@ -1,0 +1,67 @@
+<!-- Breadcrumb -->
+
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+<!-- Page Title -->
+<mat-card-title>{{literals.paramTarifas.detalleCentrosTitle}}</mat-card-title>
+<mat-card-content>
+  <div class="row">
+    <div class="col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'Tipo de tarifa'}}</mat-label>
+          <input matInput value="{{constantData.tipodeTarifa}}" disabled>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'Descripción'}}</mat-label>
+          <input matInput value="{{constantData.description}}" disabled>
+        </mat-form-field>
+    </div>
+    <div class="col-lg-2">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'Vigenica desde'}}</mat-label>
+        <input matInput value="{{dateFormat(constantData.fechaDesdeVigencia)}}" disabled>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="parkingRateParametroManagement" #parkingRateType [style.height.px]="">
+    <form [formGroup]="parkingRateManagement" (ngSubmit)="parkingRateManagementSubmit()" novalidate>
+      <div class="row">
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>{{literals.tarifasCentro.codigoCentro}}</mat-label>
+              <input matInput placeholder="{{'EJ: G'}}" autocomplete="off" formControlName="centro">
+            </mat-form-field>
+        </div>
+        <div class="col-lg-5">
+            <mat-form-field appearance="outline">
+              <mat-label>{{literals.tarifasCentro.descripcion}}</mat-label>
+              <input matInput placeholder="{{'EJ: ' + literals.Gratuita}}" autocomplete="off" formControlName="description">
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <div class="tipos-tarif-search-action">
+              <button mat-stroked-button color="basic" class="mat-stroked-button" type="button" (click)="cancel()"><span>{{'Limpiar'}}</span></button>
+              <button mat-raised-button color="primary" type="submit">{{'Buscar'}}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <mat-card *ngIf="dataSource.length && whileLoading">
+    <app-table [data]="dataSource" [columns]="columns" [showView]="showView"></app-table>
+  </mat-card>
+</mat-card-content>
+
+<div class="row">
+    <div class="col-lg-12 actions">
+        <div class="parametro-tarif-search-action">
+          <button mat-raised-button color="basic" [routerLink]="'/parametros-tarifa'" type="button"><span>{{literals.return}}</span></button>
+        </div>
+      </div>
+</div>
+
+

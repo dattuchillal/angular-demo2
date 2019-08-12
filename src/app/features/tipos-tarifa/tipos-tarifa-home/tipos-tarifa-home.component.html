@@ -1,0 +1,26 @@
+<!-- Breadcrumb -->
+
+<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+
+<!-- Page Title -->
+<mat-card-title>{{literals.tiposTarifaTitle}}</mat-card-title>
+
+<mat-card-content>
+  <app-tipos-tarifa-search [compName]="'home'" (searchData)="search($event)" (cancel)="cancel()"></app-tipos-tarifa-search>
+  <div class="col-lg-12">
+      <button mat-icon-button color="primary" [routerLink]="['alta']"><mat-icon>add_circle_outline</mat-icon>
+      {{literals.tiposTarifa.add}}
+      </button>
+  </div>
+  <mat-card>
+    <app-table *ngIf="whileLoading; else loading" [literals]="literals" [data]="dataSource" [columns]="columns"
+    (editData)="edit($event)" (deleteData)="delete($event)" (checkCenter)="checkCenter($event)"
+    (porDefecto)="setPorDefecto($event)"></app-table>
+  </mat-card>
+  <ng-template #loading>
+    <div class="whileLoading">
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+      <div>{{literals.pleaseWait}}</div>
+    </div>
+  </ng-template>
+</mat-card-content>
